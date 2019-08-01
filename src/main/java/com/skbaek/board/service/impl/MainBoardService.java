@@ -1,0 +1,60 @@
+package com.skbaek.board.service.impl;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.skbaek.board.controller.BoardController;
+import com.skbaek.board.entity.Board;
+import com.skbaek.board.repository.BoardListRepository;
+import com.skbaek.board.service.BoardService;
+import com.skbaek.board.util.Util;
+
+@Service
+public class MainBoardService implements BoardService{
+	
+	Logger logger = LoggerFactory.getLogger(MainBoardService.class); 
+
+	@Autowired
+	private BoardListRepository boardRepository;
+
+	@Override
+	@Transactional
+	public List<Board> list() throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, Object> responseMap = new HashMap<>();
+
+		List<Board> dataList = boardRepository.findAll();
+		
+		responseMap.put("data", dataList);
+		
+		logger.debug("data : {}", dataList);
+		
+		return dataList; 
+	}
+
+	@Override
+	@Transactional
+	public void save(Board param) throws Exception {
+		Date registDate = Util.getNowToDate("yyyy-MM-dd HH:mm:ss", "UTC");
+		param.setEnrollTime(registDate);
+		boardRepository.save(param);
+	}
+
+	@Override
+	@Transactional
+	public void update(Board board) throws Exception {
+		Date updateDate = Util.getNowToDate("yyyy-MM-dd HH:mm:ss", "UTC");
+		board.setUpdateTime(updateDate);
+		boardRepository.save(board);
+	}
+
+}
