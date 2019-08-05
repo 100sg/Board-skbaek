@@ -1,5 +1,6 @@
 package com.skbaek.board.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name = "board_list")
@@ -35,14 +38,14 @@ public class Board {
 
 	@Column(name = "like_cnt")
 	private int likeCnt;
-	
-    @CreationTimestamp
-	@Column(name = "enroll_time")
-	private Date enrollTime;
+
+	@CreationTimestamp
+	@Column(name = "enroll_time", updatable = false)
+	private LocalDateTime enrollTime;
 
     @UpdateTimestamp
-	@Column(name = "update_time")
-	private Date updateTime;
+	@Column(name = "update_time", insertable = false)
+	private LocalDateTime updateTime;
 
 	public long getNo() {
 		return no;
@@ -92,19 +95,19 @@ public class Board {
 		this.likeCnt = likeCnt;
 	}
 
-	public Date getEnrollTime() {
+	public LocalDateTime getEnrollTime() {
 		return enrollTime;
 	}
 
-	public void setEnrollTime(Date enrollTime) {
+	public void setEnrollTime(LocalDateTime enrollTime) {
 		this.enrollTime = enrollTime;
 	}
 
-	public Date getUpdateTime() {
+	public LocalDateTime getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(LocalDateTime updateTime) {
 		this.updateTime = updateTime;
 	}
 

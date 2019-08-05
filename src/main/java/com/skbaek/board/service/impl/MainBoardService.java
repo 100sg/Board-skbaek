@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,18 +44,28 @@ public class MainBoardService implements BoardService{
 
 	@Override
 	@Transactional
-	public void save(Board param) throws Exception {
-		Date registDate = Util.getNowToDate("yyyy-MM-dd HH:mm:ss", "UTC");
-		param.setEnrollTime(registDate);
-		boardRepository.save(param);
+	public Board save(Board param) throws Exception {
+//		Date registDate = Util.getNowToDate("yyyy-MM-dd HH:mm:ss", "seoul");
+//		param.setEnrollTime(registDate);
+		return boardRepository.save(param);
 	}
 
 	@Override
 	@Transactional
-	public void update(Board board) throws Exception {
-		Date updateDate = Util.getNowToDate("yyyy-MM-dd HH:mm:ss", "UTC");
-		board.setUpdateTime(updateDate);
-		boardRepository.save(board);
+	public Board update(Board board) throws Exception {
+//		Date updateDate = Util.getNowToDate("yyyy-MM-dd HH:mm:ss", "seoul");
+//		board.setUpdateTime(updateDate);
+		return boardRepository.save(board);
+	}
+
+	@Override
+	public void del(Board board) {
+		boardRepository.delete(board);
+	}
+
+	@Override
+	public Optional<Board> detail(Board board) {
+		return boardRepository.findById(board.getNo());
 	}
 
 }
