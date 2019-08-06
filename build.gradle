@@ -6,7 +6,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.skbaek.board'
+group = 'com.skbaek'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -19,4 +19,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.hibernate:hibernate-entitymanager'
+	compile("mysql:mysql-connector-java")
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+	compileOnly('org.projectlombok:lombok')
 }
