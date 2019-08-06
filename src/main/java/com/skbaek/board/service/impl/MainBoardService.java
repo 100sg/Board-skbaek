@@ -1,23 +1,18 @@
 package com.skbaek.board.service.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.skbaek.board.controller.BoardController;
 import com.skbaek.board.entity.Board;
 import com.skbaek.board.repository.BoardListRepository;
 import com.skbaek.board.service.BoardService;
-import com.skbaek.board.util.Util;
 
 @Service
 public class MainBoardService implements BoardService{
@@ -28,17 +23,9 @@ public class MainBoardService implements BoardService{
 	private BoardListRepository boardRepository;
 
 	@Override
-	@Transactional
-	public List<Board> list() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		Map<String, Object> responseMap = new HashMap<>();
-
-		List<Board> dataList = boardRepository.findAll();
-		
-		responseMap.put("data", dataList);
-		
-		logger.debug("data : {}", dataList);
-		
+	@Transactional(readOnly = true)
+	public Page<Board> list(final Pageable page) throws Exception {
+		Page<Board> dataList = boardRepository.findAll(page);
 		return dataList; 
 	}
 
@@ -67,5 +54,6 @@ public class MainBoardService implements BoardService{
 	public Optional<Board> detail(Board board) {
 		return boardRepository.findById(board.getNo());
 	}
+
 
 }

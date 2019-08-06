@@ -19,7 +19,7 @@
 		</filter>
 	</appender>
 	
-	<logger name="com.ex.demo" level="INFO" />
+	<logger name="com.skbaek.board" level="DEBUG" />
 	<logger name="org.springframework" level="INFO"/>
 	<logger name="org.hibernate.SQL" levl="INFO"/>
 	<root level="INFO">
