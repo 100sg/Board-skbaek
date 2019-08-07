@@ -1,12 +1,12 @@
 > API Docs
->> [API Docs](https://github.com/ar-my/Board-skbaek.wiki.git)
+>> [API Docs](https://github.com/ar-my/Board-skbaek.wiki)
 
 # Board Project - skbaek
 > ============= 8/1 까지 =============
 1. project setting
 * springboot
 * gradle 
-* MySql ([docker 사용법](https://github.com/ar-my/Board-skbaek.wiki.git))
+* MySql ([docker 사용법](https://github.com/ar-my/Board-skbaek.wiki))
 * JPA
 * github
 2.  구현방안 
