@@ -6,7 +6,7 @@
 1. project setting
 * springboot
 * gradle 
-* MySql
+* MySql[docker 사용법](https://github.com/ar-my/Board-skbaek.wiki.git)
 * JPA
 * github
 2.  구현방안 
